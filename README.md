@@ -1,68 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Structure
+The top level component gives an array of components that represent the wizard steps 
+to the wizard component as a prop.
+The wizard is a reusable component that is not concerned with the content, shape or layout of 
+the wizard steps, and manages the rendering of these components through actions that represent 
+navigating back and forth through the array of wizard step components
 
-## Available Scripts
+## State
+Local state was used for each wizard step to persist changes as per user input.  
+Initial state is loaded from the relevant slice of state in wizardContext that is passed in as a prop.  
+This starts out as empty state the first time each wizard step is loaded, then is updated
+as per user input. Hence, the wizard builds the state from an initial empty state object to fully
+populated object by the last step.
 
-In the project directory, you can run:
+## Flow
+When user clicks next to navigate to subsequent wizard step, a prop function is called that communicates
+the local state to the top level component.  The local state is merged into the top level state and
+passed down to parent wizard component which in turn passes updated state to all wizard steps.
+The final wizard step displays all slices of state in one view and prompts user for confirmation at 
+which point the user can switch to label maker view. 
 
-### `yarn start`
+## Label Maker View
+The top level component responds to the complete action from the wizard by toggling the view 
+from wizard to make label view.  The top level state is passed to the label view as a prop. 
+Clicking on the Make another label button toggles the complete status and renders the first wizard
+step.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Validation
+Simple validation is implemented that ensures all fields are filled.  If any fields remain
+empty the next navigation button/action is disabled.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Styling
+Styled components was used as the styling framework of choice.  It offers a self-contained styling
+solution, that avoids namespace styling conflicts and gives styling a semantic declarative approach.
 
-### `yarn test`
+## To do's
+Given more time the following improvements can be implemented:
+Wizard steps can be converted to functional components that leverage the new hooks feature to
+manage local state.
+Validation can be more elaborate, and go beyond the simple required field validation.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Instructions
+Clone the project
+Navigate into project root directory
+Run 'npm install'
+Run 'npm start'
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+ 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
