@@ -50,12 +50,22 @@ class GetSenderAddress extends React.Component {
         });
     };
 
+    isButtonEnabled = () => {
+        return Object.keys(this.state).reduce((acc, f) => {
+            if(this.state[f].length === 0){
+                return true;
+            }
+            return acc;
+        }, false);
+    };
+
     handleNavigationClick = (action) => {
         this.props.wizardContext.from = this.state;
         this.props.onAction(action);
     };
 
     render() {
+        const {disabled} = this.state;
         return (
             <MainView>
                 <SubTitle><h4>Enter the sender's address:</h4></SubTitle>
@@ -63,7 +73,7 @@ class GetSenderAddress extends React.Component {
                     <AddressForm handleChange={this.handleChange} {...this.state} />
                 </FormRow>
                 <NavigationRow>
-                    <Navigation onAction={this.handleNavigationClick} next />
+                    <Navigation onAction={this.handleNavigationClick} next disabled={this.isButtonEnabled()} />
                 </NavigationRow>
             </MainView>
         );

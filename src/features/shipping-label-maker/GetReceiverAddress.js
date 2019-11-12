@@ -57,6 +57,15 @@ class GetSenderAddress extends React.Component {
         this.props.onAction(action);
     };
 
+    isButtonEnabled = () => {
+        return Object.keys(this.state).reduce((acc, f) => {
+            if(this.state[f].length === 0){
+                return true;
+            }
+            return acc;
+        }, false);
+    };
+
     render() {
         return (
             <MainView>
@@ -65,7 +74,7 @@ class GetSenderAddress extends React.Component {
                     <AddressForm handleChange={this.handleChange} {...this.state} />
                 </FormRow>
                 <NavigationRow>
-                    <Navigation onAction={this.handleNavigationClick} prev next />
+                    <Navigation onAction={this.handleNavigationClick} prev next disabled={this.isButtonEnabled()} />
                 </NavigationRow>
             </MainView>
         );

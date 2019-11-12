@@ -37,14 +37,15 @@ class Navigation extends React.Component {
     };
 
     renderNextButton = () => {
-        const { next } = this.props;
+        const { next, disabled } = this.props;
         if (!next) {
             return;
         }
         return (
             <Button
                 className="btn btn-primary float-right"
-                type="button" onClick={this.handleNextClick}>
+                type="button" onClick={this.handleNextClick}
+                disabled={disabled}>
                 Next
             </Button>
         )

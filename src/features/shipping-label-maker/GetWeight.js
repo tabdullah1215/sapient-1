@@ -55,6 +55,15 @@ class GetWeight extends React.Component {
         this.props.onAction(action);
     };
 
+    isButtonEnabled = () => {
+        return Object.keys(this.state).reduce((acc, f) => {
+            if(this.state[f].length === 0){
+                return true;
+            }
+            return acc;
+        }, false);
+    };
+
     render() {
         const { weight } = this.state;
         return(
@@ -73,7 +82,7 @@ class GetWeight extends React.Component {
                     />
                 </FormRow>
                 <NavigationRow>
-                    <Navigation onAction={this.handleNavigationClick} prev next />
+                    <Navigation onAction={this.handleNavigationClick} prev next disabled={this.isButtonEnabled()} />
                 </NavigationRow>
             </MainView>
         );
