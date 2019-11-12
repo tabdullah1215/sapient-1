@@ -1,6 +1,8 @@
 import React from 'react';
 import Navigation from './Navigation';
 import styled from 'styled-components';
+import { ShippingOptions } from './constants';
+import { getShippingCost} from "./utils";
 
 const MainView = styled.div`
     height: 100%;
@@ -36,8 +38,20 @@ const Category = styled.div`
     font-weight: bold;
 `;
 
-const SideContainer = styled.div`
+const AddressContainer = styled.div`
     width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 20px;
+    margin-right: 5px;
+`;
+
+const DataContainer = styled.div`
+    width: 33%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -69,55 +83,66 @@ class Confirm extends React.Component {
     getConfirmFrom = () => {
         const {from} = this.props.wizardContext;
         return(
-            <SideContainer>
+            <AddressContainer>
                 <Category>From:</Category>
                 {
                     Object.keys(from).map(f => {
                         return <div>{from[f]}</div>
                     })
                 }
-            </SideContainer>
+            </AddressContainer>
         )
     };
 
     getConfirmTo = () => {
         const {to} = this.props.wizardContext;
         return(
-            <SideContainer>
+            <AddressContainer>
                 <Category>To:</Category>
                 {
                     Object.keys(to).map(f => {
                         return <div>{to[f]}</div>
                     })
                 }
-            </SideContainer>
+            </AddressContainer>
         )
     };
     getConfirmWeight = () => {
         const {weight} = this.props.wizardContext;
         return(
-            <SideContainer>
+            <DataContainer>
                 <Category>Weight:</Category>
                 <div>{`${weight} lbs`}</div>
-            </SideContainer>
+            </DataContainer>
         )
     };
 
     getConfirmShippingOption = () => {
         const {shippingOption} = this.props.wizardContext;
         return(
-            <SideContainer>
+            <DataContainer>
                 <Category>Shipping Option:</Category>
                 <div>
-                    <span>{`Option: ${shippingOption.value}`}</span>
-                    <span>{`, Description: ${shippingOption.label}`}</span>
+                    <span>{`Option: ${shippingOption}`}</span>
+                    <span>{`, Description: ${Object.keys(ShippingOptions)
+                        .find(key => ShippingOptions[key] === shippingOption)}`}</span>
                 </div>
-            </SideContainer>
+            </DataContainer>
         )
     };
 
+    getConfirmCost = () => {
+        const {shippingOption, weight} = this.props.wizardContext;
+        return(
+            <DataContainer>
+                <Category>Shipping Cost:</Category>
+                <div>
+                    <span>{getShippingCost(weight, shippingOption)}</span>
+                </div>
+            </DataContainer>
+        )
+    };
     render() {
-        console.log(this.props);
         return(
             <MainView>
                 <SubTitle><h4>Confirm Shipping Information:</h4></SubTitle>
@@ -128,6 +153,7 @@ class Confirm extends React.Component {
                 <DataRow>
                     {this.getConfirmWeight()}
                     {this.getConfirmShippingOption()}
+                    {this.getConfirmCost()}
                 </DataRow>
                 <NavigationRow>
                     <Navigation onAction={this.handleNavigationClick} prev confirm />

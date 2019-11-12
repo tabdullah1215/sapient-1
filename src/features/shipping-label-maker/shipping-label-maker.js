@@ -16,10 +16,6 @@ const MainView = styled.div`
     align-items: center;
 `;
 
-const Title = styled.h1`
-    
-`;
-
 export default class ShippingLabelMaker extends Component {
     constructor(props){
         super(props);
@@ -42,8 +38,9 @@ export default class ShippingLabelMaker extends Component {
                 zip: ''
             },
             weight: 0,
-            shippingOptions: 1
-        };
+            shippingOption: 1
+        }
+        ;
         this.steps = [GetSenderAddress, GetReceiverAddress, GetWeight, GetShippingOption, Confirm];
     }
 

@@ -93,12 +93,11 @@ class Wizard extends React.Component {
                     <ProgressBar percent={((parseInt(currentStep) + 1)/(steps.length))*100} />
                 </HeaderView>
                 <FormView>
-                {this.getStep()}
+                    {this.getStep()}
                 </FormView>
             </MainView>
         );
     }
 }
-
 
 export default Wizard;

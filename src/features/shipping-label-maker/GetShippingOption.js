@@ -2,6 +2,7 @@ import React from 'react';
 import Navigation from './Navigation';
 import styled from 'styled-components';
 import Select from 'react-select';
+import { ShippingOptions } from './constants';
 
 const MainView = styled.div`
     height: 100%;
@@ -28,10 +29,13 @@ const NavigationRow = styled.div`
     height: 15%;
 `;
 
-const options = [
-    {label: "ground", value: "1"},
-    {label: "priority", value: "2"}
-];
+const options = Object.keys(ShippingOptions).map(key => {
+    return {
+        label: key,
+        value: ShippingOptions[key]
+    };
+});
+
 class GetShippingOption extends React.Component {
 
     constructor(props) {
@@ -44,7 +48,7 @@ class GetShippingOption extends React.Component {
 
     handleChange = shippingOption => {
         this.setState({
-            shippingOption: shippingOption
+            shippingOption: shippingOption.value
         });
     };
 
@@ -62,7 +66,11 @@ class GetShippingOption extends React.Component {
                 <FormRow className="form-group">
                     <label htmlFor="name">Shipping Option</label>
                     <Select
-                        value={shippingOption}
+                        value={{
+                            value: shippingOption,
+                            label: Object.keys(ShippingOptions)
+                                .find(key => ShippingOptions[key] === shippingOption)
+                        }}
                         onChange={this.handleChange}
                         options={options}
                     />
