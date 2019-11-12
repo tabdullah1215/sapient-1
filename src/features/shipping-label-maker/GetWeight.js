@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Navigation from './Navigation';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const MainView = styled.div`
+
+const GetWeight = (props) => {
+    const MainView = styled.div`
     height: 100%;
     width: 100%;
     display: flex;
@@ -12,85 +14,67 @@ const MainView = styled.div`
     text-align: left;
 `;
 
-const Input = styled.input`
+    const Input = styled.input`
     margin-bottom: 10px;
 `;
 
-const SubTitle = styled.div`
+    const SubTitle = styled.div`
     width: 100%;
     height: 15%;
     text-align: left;
 `;
 
-const FormRow = styled.div`
+    const FormRow = styled.div`
     width: 100%;
     height: 70%;  
 `;
 
-const NavigationRow = styled.div`
+    const NavigationRow = styled.div`
     width: 100%;
     height: 15%;
 `;
 
-class GetWeight extends React.Component {
 
-    constructor(props) {
-        super(props);
-        const { weight } = this.props.wizardContext;
-        this.state = {
-            weight
-        };
-    }
+    const [weight, setWeight] = useState(props.wizardContext.weight);
 
-    handleChange = (e) => {
+    const handleChange = (e) => {
         const {name, value} = e.target;
-        this.setState({
-            [name]: value
-        });
+        setWeight(value);
     };
 
-    handleNavigationClick = (action) => {
-        const { weight } = this.state;
-        // this.props.wizardContext.weight = weight;
-        this.props.handleNext(
+    const handleNavigationClick = (action) => {
+        props.handleNext(
             weight
         , 'weight');
-        this.props.onAction(action);
+        props.onAction(action);
     };
 
-    isButtonEnabled = () => {
-        return Object.keys(this.state).reduce((acc, f) => {
-            if(this.state[f].length === 0 || this.state[f] <= 0){
-                return true;
-            }
-            return acc;
-        }, false);
+    const isButtonEnabled = () => {
+        if(weight.length === 0 || parseInt(weight) <= 0){
+            return false;
+        }
     };
-
-    render() {
-        const { weight } = this.state;
-        return(
-            <MainView>
-                <SubTitle><h4>Enter Weight:</h4></SubTitle>
-                <FormRow className="form-group">
-                    <label htmlFor="name">Weight</label>
-                    <Input
-                        className="form-control"
-                        id="weight"
-                        name="weight"
-                        type="number"
-                        placeholder="Enter weight"
-                        value={weight}
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                </FormRow>
-                <NavigationRow>
-                    <Navigation onAction={this.handleNavigationClick} prev next disabled={this.isButtonEnabled()} />
-                </NavigationRow>
-            </MainView>
-        );
-    }
-}
+    return(
+        <MainView>
+            <SubTitle><h4>Enter Weight:</h4></SubTitle>
+            <FormRow className="form-group">
+                <label htmlFor="name">Weight</label>
+                <Input
+                    className="form-control"
+                    id="weight"
+                    name="weight"
+                    type="number"
+                    placeholder="Enter weight"
+                    value={weight}
+                    onChange={(e) => handleChange(e)}
+                />
+            </FormRow>
+            <NavigationRow>
+                <Navigation onAction={handleNavigationClick} prev next disabled={isButtonEnabled()} />
+            </NavigationRow>
+        </MainView>
+    );
+};
 
 export default GetWeight;
 

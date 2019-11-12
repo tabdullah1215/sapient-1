@@ -1,3 +1,7 @@
+## Interfaces
+This project implements interfaces as required by the specs using the prop-types construct.
+Both the wizard component and the wizard steps implement prop-types that drive both the flow and structure of the project.
+
 ## Structure
 The top level component gives an array of components that represent the wizard steps 
 to the wizard component as a prop.
@@ -7,6 +11,7 @@ navigating back and forth through the array of wizard step components
 
 ## State
 Local state was used for each wizard step to persist changes as per user input.  
+The GetWizard component demonstrates the implementation using functional components with hooks.
 Initial state is loaded from the relevant slice of state in wizardContext that is passed in as a prop.  
 This starts out as empty state the first time each wizard step is loaded, then is updated
 as per user input. Hence, the wizard builds the state from an initial empty state object to fully
@@ -35,8 +40,9 @@ solution, that avoids namespace styling conflicts and gives styling a semantic d
 
 ## To do's
 Given more time the following improvements can be implemented:
-Wizard steps can be converted to functional components that leverage the new hooks feature to
-manage local state.
+All wizard steps can be converted to functional components that leverage the new hooks feature to
+manage local state.  The GetWeight step is in functional component form using setState to persist and update state as 
+mentioned above. The other wizard steps can be converted in a similar fashion.
 Validation can be more elaborate, and go beyond the simple required field validation.
 
 ## Instructions
