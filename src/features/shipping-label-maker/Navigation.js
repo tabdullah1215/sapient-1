@@ -27,6 +27,7 @@ const NavigationLeftSide = styled.div`
 
 const Button = styled.button`
     max-height: 38px;
+    min-width: 85px;
 `
 
 class Navigation extends React.Component {
