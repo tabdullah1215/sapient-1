@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 import styled from 'styled-components';
 import Select from 'react-select';
 import { ShippingOptions } from './constants';
+import PropTypes from 'prop-types';
 
 const MainView = styled.div`
     height: 100%;
@@ -84,3 +85,8 @@ class GetShippingOption extends React.Component {
 }
 
 export default GetShippingOption;
+
+GetShippingOption.propTypes = {
+    wizardContext: PropTypes.object.isRequired,
+    onAction: PropTypes.func.isRequired
+};

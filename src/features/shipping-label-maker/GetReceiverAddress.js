@@ -2,6 +2,7 @@ import React from "react";
 import AddressForm from './AddressForm';
 import Navigation from './Navigation';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const MainView = styled.div`
     height: 100%;
@@ -72,3 +73,8 @@ class GetSenderAddress extends React.Component {
 }
 
 export default GetSenderAddress;
+
+GetSenderAddress.propTypes = {
+    wizardContext: PropTypes.object.isRequired,
+    onAction: PropTypes.func.isRequired
+};

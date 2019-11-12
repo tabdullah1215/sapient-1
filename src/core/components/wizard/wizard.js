@@ -3,6 +3,7 @@ import { WizardAction } from './constants';
 import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const MainView = styled.div`
     width: 800px;
@@ -101,3 +102,10 @@ class Wizard extends React.Component {
 }
 
 export default Wizard;
+
+Wizard.propTypes = {
+    header: PropTypes.func.isRequired,
+    steps: PropTypes.array.isRequired,
+    wizardContext: PropTypes.object.isRequired,
+    onComplete: PropTypes.func.isRequired
+};

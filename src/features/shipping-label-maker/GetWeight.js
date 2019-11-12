@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from './Navigation';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const MainView = styled.div`
     height: 100%;
@@ -80,3 +81,8 @@ class GetWeight extends React.Component {
 }
 
 export default GetWeight;
+
+GetWeight.propTypes = {
+    wizardContext: PropTypes.object.isRequired,
+    onAction: PropTypes.func.isRequired
+};

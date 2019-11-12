@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 import styled from 'styled-components';
 import { ShippingOptions } from './constants';
 import { getShippingCost} from "./utils";
+import PropTypes from 'prop-types';
 
 const MainView = styled.div`
     height: 100%;
@@ -86,8 +87,8 @@ class Confirm extends React.Component {
             <AddressContainer>
                 <Category>From:</Category>
                 {
-                    Object.keys(from).map(f => {
-                        return <div>{from[f]}</div>
+                    Object.keys(from).map((f, i) => {
+                        return <div key={i}>{from[f]}</div>
                     })
                 }
             </AddressContainer>
@@ -100,8 +101,8 @@ class Confirm extends React.Component {
             <AddressContainer>
                 <Category>To:</Category>
                 {
-                    Object.keys(to).map(f => {
-                        return <div>{to[f]}</div>
+                    Object.keys(to).map((f, i) => {
+                        return <div key={i}>{to[f]}</div>
                     })
                 }
             </AddressContainer>
@@ -164,3 +165,8 @@ class Confirm extends React.Component {
 }
 
 export default Confirm;
+
+Confirm.propTypes = {
+    wizardContext: PropTypes.object.isRequired,
+    onAction: PropTypes.func.isRequired
+};
