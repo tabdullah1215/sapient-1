@@ -50,9 +50,8 @@ const GetWeight = (props) => {
     };
 
     const isButtonEnabled = () => {
-        if(weight.length === 0 || parseInt(weight) <= 0){
-            return false;
-        }
+        console.log(!(weight.length === 0 || parseInt(weight) <= 0));
+        return !(weight.length === 0 || parseInt(weight) <= 0)
     };
     return(
         <MainView>
@@ -70,7 +69,7 @@ const GetWeight = (props) => {
                 />
             </FormRow>
             <NavigationRow>
-                <Navigation onAction={handleNavigationClick} prev next disabled={isButtonEnabled()} />
+                <Navigation onAction={handleNavigationClick} prev next disabled={!isButtonEnabled()} />
             </NavigationRow>
         </MainView>
     );
