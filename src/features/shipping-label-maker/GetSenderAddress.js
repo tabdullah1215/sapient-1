@@ -17,6 +17,17 @@ const SubTitle = styled.div`
     text-align: left;
 `;
 
+const FormRow = styled.div`
+    width: 100%;
+    height: 70%;  
+`;
+
+const NavigationRow = styled.div`
+    width: 100%;
+    height: 15%;
+    display: flex;
+`;
+
 class GetSenderAddress extends React.Component {
 
     constructor(props) {
@@ -47,8 +58,12 @@ class GetSenderAddress extends React.Component {
         return (
             <MainView>
                 <SubTitle><h4>Enter the sender's address:</h4></SubTitle>
-                <AddressForm handleChange={this.handleChange} {...this.state} />
-                <Navigation onAction={this.handleNavigationClick} next />
+                <FormRow>
+                    <AddressForm handleChange={this.handleChange} {...this.state} />
+                </FormRow>
+                <NavigationRow>
+                    <Navigation onAction={this.handleNavigationClick} next />
+                </NavigationRow>
             </MainView>
         );
     }

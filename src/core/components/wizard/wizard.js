@@ -6,21 +6,21 @@ import styled from 'styled-components';
 
 const MainView = styled.div`
     width: 800px;
-    height: 660px;
+    height: 500px;
     border: 5px solid black;
     border-radius: 20px;
-    padding: 30px 20px;
+    padding: 10px 20px;
 `;
 
 const HeaderView = styled.div`
     width: 100%;
-    height: 20%;
+    height: 25%;
     text-align: left;
 `;
 
 const FormView = styled.div`
     width: 100%;
-    height: 80%;
+    height: 75%;
 `;
 
 const SubTitle = styled.div`

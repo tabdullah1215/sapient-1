@@ -1,6 +1,33 @@
 import React from "react";
 import { WizardAction } from '../../core/components/wizard';
+import styled from 'styled-components';
 
+const NavigationRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+`;
+
+const NavigationRightSide = styled.div`
+    height: auto;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+`;
+
+const NavigationLeftSide = styled.div`
+    height: auto;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+`;
+
+const Button = styled.button`
+    max-height: 38px;
+`
 
 class Navigation extends React.Component {
 
@@ -14,11 +41,11 @@ class Navigation extends React.Component {
             return;
         }
         return (
-            <button
+            <Button
                 className="btn btn-primary float-right"
                 type="button" onClick={this.handleNextClick}>
                 Next
-            </button>
+            </Button>
         )
     };
 
@@ -32,11 +59,11 @@ class Navigation extends React.Component {
             return;
         }
         return (
-            <button
+            <Button
                 className="btn btn-secondary"
                 type="button" onClick={this.handlePreviousClick}>
                 Previous
-            </button>
+            </Button>
         )
     };
 
@@ -50,21 +77,25 @@ class Navigation extends React.Component {
             return;
         }
         return (
-            <button
+            <Button
                 className="btn btn-primary float-right"
                 type="button" onClick={this.handleConfirmClick}>
                 Confirm
-            </button>
+            </Button>
         )
     };
 
     render() {
         return (
-            <div>
+            <NavigationRow>
+                <NavigationLeftSide>
                 {this.renderPreviousButton()}
+                </NavigationLeftSide>
+                <NavigationRightSide>
                 {this.renderNextButton()}
                 {this.renderConfirmButton()}
-            </div>
+                </NavigationRightSide>
+            </NavigationRow>
         );
     }
 }

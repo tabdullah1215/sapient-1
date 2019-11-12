@@ -17,7 +17,18 @@ const Input = styled.input`
 
 const SubTitle = styled.div`
     width: 100%;
+    height: 15%;
     text-align: left;
+`;
+
+const FormRow = styled.div`
+    width: 100%;
+    height: 70%;  
+`;
+
+const NavigationRow = styled.div`
+    width: 100%;
+    height: 15%;
 `;
 
 class GetWeight extends React.Component {
@@ -48,7 +59,7 @@ class GetWeight extends React.Component {
         return(
             <MainView>
                 <SubTitle><h4>Enter Weight:</h4></SubTitle>
-                <div className="form-group">
+                <FormRow className="form-group">
                     <label htmlFor="name">Weight</label>
                     <Input
                         className="form-control"
@@ -59,8 +70,10 @@ class GetWeight extends React.Component {
                         value={weight}
                         onChange={(e) => this.handleChange(e)}
                     />
-                </div>
-                <Navigation onAction={this.handleNavigationClick} prev next />
+                </FormRow>
+                <NavigationRow>
+                    <Navigation onAction={this.handleNavigationClick} prev next />
+                </NavigationRow>
             </MainView>
         );
     }

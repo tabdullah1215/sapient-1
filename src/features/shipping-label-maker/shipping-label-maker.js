@@ -49,9 +49,9 @@ export default class ShippingLabelMaker extends Component {
 
     getHeader = () => {
         return (
-            <h1>
+            <h2>
                 Shipping Label Maker
-            </h1>
+            </h2>
         )
     };
 
