@@ -58,7 +58,7 @@ class Wizard extends React.Component {
     };
 
     end = () => {
-        this.props.onComplete();
+        this.props.onComplete(true);
     };
 
     onAction = (action) => {
@@ -74,12 +74,16 @@ class Wizard extends React.Component {
         }
     };
 
+    handleNext = (state, key) => {
+        this.props.handleNext(state, key);
+    };
+
     getStep = () => {
         const { currentStep } = this.state;
         const { steps, wizardContext } = this.props;
         const Comp = steps[currentStep];
         return (
-            <Comp onAction={this.onAction} wizardContext={wizardContext} />
+            <Comp onAction={this.onAction} wizardContext={wizardContext} handleNext={this.handleNext} />
         );
     };
 

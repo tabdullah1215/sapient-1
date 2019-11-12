@@ -16,31 +16,36 @@ const MainView = styled.div`
     align-items: center;
 `;
 
+const initialState = {
+    complete: false,
+    shippingInfo: {
+        from: {
+            name: '',
+            street: '',
+            city: '',
+            state: '',
+            zip: ''
+        },
+        to: {
+            name: '',
+            street: '',
+            city: '',
+            state: '',
+            zip: ''
+        },
+        weight: 0,
+        shippingOption: 1
+    }
+};
+
+
 export default class ShippingLabelMaker extends Component {
     constructor(props){
         super(props);
         this.state = {
-            complete: false
+            ...initialState
         };
-        this.shippingInfo = {
-            from: {
-                name: '',
-                street: '',
-                city: '',
-                state: '',
-                zip: ''
-            },
-            to: {
-                name: '',
-                street: '',
-                city: '',
-                state: '',
-                zip: ''
-            },
-            weight: 0,
-            shippingOption: 1
-        }
-        ;
+
         this.steps = [GetSenderAddress, GetReceiverAddress, GetWeight, GetShippingOption, Confirm];
     }
 
@@ -52,18 +57,31 @@ export default class ShippingLabelMaker extends Component {
         )
     };
 
-    onComplete = () => {
+    onComplete = (action) => {
+        if(!action){
+            this.setState({
+                ...initialState
+            });
+        }
         this.setState({
-            complete: true
+            complete: action
         });
     };
 
+    handleNext = (newState, key) => {
+        let shippingInfo = {...this.state.shippingInfo};
+        shippingInfo[key] = newState;
+        this.setState({
+            shippingInfo
+        })
+    };
+
     render() {
-        const { complete } = this.state;
+        const { complete, shippingInfo } = this.state;
         if (complete) {
             return (
                 <MainView>
-                    <ShippingLabel shippingLabel={this.shippingInfo} />
+                    <ShippingLabel shippingLabel={shippingInfo} onComplete={this.onComplete} />
                 </MainView>
             );
         } else {
@@ -71,8 +89,10 @@ export default class ShippingLabelMaker extends Component {
                 <MainView>
                     <Wizard header={this.getHeader}
                         steps={this.steps}
-                        wizardContext={this.shippingInfo}
-                        onComplete={this.onComplete} />
+                        wizardContext={shippingInfo}
+                        onComplete={this.onComplete}
+                        handleNext={this.handleNext}/>
+
                 </MainView>
             );
         }

@@ -60,12 +60,14 @@ class GetSenderAddress extends React.Component {
     };
 
     handleNavigationClick = (action) => {
-        this.props.wizardContext.from = this.state;
+        // this.props.wizardContext.from = this.state;
+        this.props.handleNext({
+                    ...this.state
+        }, 'from');
         this.props.onAction(action);
     };
 
     render() {
-        const {disabled} = this.state;
         return (
             <MainView>
                 <SubTitle><h4>Enter the sender's address:</h4></SubTitle>

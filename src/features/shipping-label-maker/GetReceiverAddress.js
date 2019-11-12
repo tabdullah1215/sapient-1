@@ -53,7 +53,10 @@ class GetSenderAddress extends React.Component {
     };
 
     handleNavigationClick = (action) => {
-        this.props.wizardContext.to = this.state;
+        // this.props.wizardContext.to = this.state;
+        this.props.handleNext({
+            ...this.state
+        }, 'to');
         this.props.onAction(action);
     };
 

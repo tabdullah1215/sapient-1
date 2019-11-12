@@ -55,7 +55,10 @@ class GetShippingOption extends React.Component {
 
     handleNavigationClick = (action) => {
         const { shippingOption } = this.state;
-        this.props.wizardContext.shippingOption = shippingOption;
+        // this.props.wizardContext.shippingOption = shippingOption;
+        this.props.handleNext(
+            shippingOption
+        , 'shippingOption');
         this.props.onAction(action);
     };
 

@@ -51,13 +51,16 @@ class GetWeight extends React.Component {
 
     handleNavigationClick = (action) => {
         const { weight } = this.state;
-        this.props.wizardContext.weight = weight;
+        // this.props.wizardContext.weight = weight;
+        this.props.handleNext(
+            weight
+        , 'weight');
         this.props.onAction(action);
     };
 
     isButtonEnabled = () => {
         return Object.keys(this.state).reduce((acc, f) => {
-            if(this.state[f].length === 0){
+            if(this.state[f].length === 0 || this.state[f] <= 0){
                 return true;
             }
             return acc;
