@@ -11,7 +11,7 @@ navigating back and forth through the array of wizard step components
 
 ## State
 Local state was used for each wizard step to persist changes as per user input.  
-The GetWizard component demonstrates the implementation using functional components with hooks.
+The GetWizard and GetShippingOptions components demonstrate the implementation using functional components with hooks.
 Initial state is loaded from the relevant slice of state in wizardContext that is passed in as a prop.  
 This starts out as empty state the first time each wizard step is loaded, then is updated
 as per user input. Hence, the wizard builds the state from an initial empty state object to fully
@@ -41,8 +41,8 @@ solution, that avoids namespace styling conflicts and gives styling a semantic d
 ## To do's
 Given more time the following improvements can be implemented:
 All wizard steps can be converted to functional components that leverage the new hooks feature to
-manage local state.  The GetWeight step is in functional component form using setState to persist and update state as 
-mentioned above. The other wizard steps can be converted in a similar fashion.
+manage local state.  The GetWeight and GetShippingOptions steps are in functional component form leveraging useState 
+hook to persist and update state as mentioned above. The other wizard steps can be converted in a similar fashion.
 Validation can be more elaborate, and go beyond the simple required field validation.
 
 ## Instructions
